@@ -25,7 +25,7 @@ CREATE TABLE bank_account (
 `name` VARCHAR(100) NOT NULL,
 `amount` float,
 PRIMARY KEY (`bank_id`),
-FOREIGN KEY (`user_email`) REFERENCES user(`email`)
+FOREIGN KEY (`user_id`) REFERENCES user(`user_id`)
 );
 
 -- connection
@@ -77,8 +77,8 @@ INSERT INTO `user` (`user_id`, `email`, `password`, `firstname`, `lastname`, `am
 (3, 'dzou@mail.fr', 'p455w0rd_DZ', 'Debby', 'Zou', 0),
 (4, 'jtamar@mail.fr', 'p455w0rd_JT', 'Justin', 'Tamar', 0);
 
-INSERT INTO `bank_account` (`bank_id`, `user_email`, `name`, `amount`) VALUES
-(1, 'mtampion@mail.fr', '"Caisse d\'épargne"', 1300),
-(2, 'bafritte@mail.fr', 'Boursorama', 1200),
-(3, 'dzou@mail.fr', 'Crédit mutuel', 1500),
-(4, 'jtamar@mail.fr', 'Société générale', 1100);
+INSERT INTO `bank_account` (`bank_id`, `user_id`, `name`, `amount`) VALUES
+(1, 1, '"Caisse d\'épargne"', 1300),
+(2, 2, 'Boursorama', 1200),
+(3, 3, 'Crédit mutuel', 1500),
+(4, 4, 'Société générale', 1100);
