@@ -62,6 +62,7 @@ transaction_id INTEGER NOT NULL AUTO_INCREMENT,
 user_id INTEGER NOT NULL,
 bank_id INTEGER NOT NULL,
 amount FLOAT NOT NULL,
+comment VARCHAR(250),
 fee FLOAT NOT NULL,
 PRIMARY KEY (`transaction_id`),
 FOREIGN KEY (`user_id`) REFERENCES user(`user_id`),
@@ -71,11 +72,12 @@ FOREIGN KEY (`bank_id`) REFERENCES bank_account(`bank_id`)
 
 
 -- DATA INSERTION
+-- password -> 123
 INSERT INTO `user` (`user_id`, `email`, `password`, `firstname`, `lastname`, `amount`) VALUES
-(1, 'mtampion@mail.fr', 'p455w0rd_MT', 'Mocktar', 'Tampion', 0),
-(2, 'bafritte@mail.fr', 'p455w0rd_BA', 'Barak', 'Afritte', 0),
-(3, 'dzou@mail.fr', 'p455w0rd_DZ', 'Debby', 'Zou', 0),
-(4, 'jtamar@mail.fr', 'p455w0rd_JT', 'Justin', 'Tamar', 0);
+(1, 'mtampion@mail.fr', '$2a$12$GKclbJOO27.E9nFjSE6lJuARu2OFK.0rOYyBABl16t99iWSBzxSPO', 'Mocktar', 'Tampion', 0),
+(2, 'bafritte@mail.fr', '$2a$12$GKclbJOO27.E9nFjSE6lJuARu2OFK.0rOYyBABl16t99iWSBzxSPO', 'Barak', 'Afritte', 0),
+(3, 'dzou@mail.fr', '$2a$12$GKclbJOO27.E9nFjSE6lJuARu2OFK.0rOYyBABl16t99iWSBzxSPO', 'Debby', 'Zou', 0),
+(4, 'jtamar@mail.fr', '$2a$12$GKclbJOO27.E9nFjSE6lJuARu2OFK.0rOYyBABl16t99iWSBzxSPO', 'Justin', 'Tamar', 0);
 
 INSERT INTO `bank_account` (`bank_id`, `user_id`, `name`, `amount`) VALUES
 (1, 1, '"Caisse d\'épargne"', 1300),
