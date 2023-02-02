@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+    <h1>Welcome !</h1>
+    <br />
+    <a th:href="@{/logout}">
+        <button type="button">LOGOUT</button>
+    </a>
+
+    <a th:href="@{/transfer}">TRANSFER MONEY TO FRIEND</a>
+
+    <div align="center" th:if="${username != null}">
+        <div th:text="${username}" />
+    </div>
+
+    <h2 class="h2">Liste des employées</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}">
+            <td><span th:text="${user.firstname}"> Prénom </span></td>
+            <td><span th:text="${user.lastname}"> Nom </span></td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
