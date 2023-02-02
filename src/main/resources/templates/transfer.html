@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+
+    <h1>TRANSFER</h1>
+    <br />
+    <a th:href="@{/logout}">
+        <button type="button">LOGOUT</button>
+    </a>
+
+
+    <div class="container">
+        <form th:action="@{/transfer_newFriend}" method="POST" class="form-signin">
+            <h3 class="form-signin-heading">ADD NEW FRIEND</h3><br/>
+
+            <input type="text" th:placeholder="newFriend" id="newFriend" name="newFriend" class="form-control" /> <br/>
+            <button type="Submit" th:text="search" class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" ></button>
+        </form>
+    </div>
+
+</body>
+</html>
