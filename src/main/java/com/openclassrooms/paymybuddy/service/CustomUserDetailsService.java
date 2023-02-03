@@ -15,12 +15,12 @@ import java.util.Optional;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserService userService;
+    private IUserService iUserService;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = Optional.ofNullable(userService.findByEmail(email))
+        Optional<User> user = Optional.ofNullable(iUserService.findByEmail(email))
                 .orElseThrow(() -> new UsernameNotFoundException("User " + email + " not found"));
         return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(),
                 Collections.singleton(new SimpleGrantedAuthority("USER")));
