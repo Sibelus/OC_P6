@@ -31,13 +31,14 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/createAccount").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .httpBasic(withDefaults());
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
+                .and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login");
+
+
         return http.build();
     }
 
