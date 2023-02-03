@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+	form {
+		width:30%;
+		margin:auto;
+	}
+	p {
+		font-size: 20;
+		color: #FF1C19;
+	}
+</style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a th:href="@{/createAccount}">CREATE ACCOUNT</a>
+
+        <br/><br/>
+        <form th:action="@{/login}" method="POST" class="form-signin">
+            <h3 class="form-signin-heading">LOGIN</h3>
+
+            <br/>
+            <div align="center" th:if="${param.error}">
+                <p>Invalid username or password</p>
+            </div>
+
+            <input type="text" id="username" name="username"  th:placeholder="Username" class="form-control" /> <br/>
+            <input type="password"  th:placeholder="Password" id="password" name="password" class="form-control" /> <br />
+            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+        </form>
+    </div>
+
+</body>
+</html>
