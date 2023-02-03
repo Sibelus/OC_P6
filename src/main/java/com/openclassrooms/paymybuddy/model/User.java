@@ -2,6 +2,9 @@ package com.openclassrooms.paymybuddy.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -24,6 +27,20 @@ public class User {
 
     @Column(name = "amount")
     private float amount;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    List<BankTransaction> bankTransactions = new ArrayList<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "friend_id")
+    List<Connection> friendsList = new ArrayList<>();
 
 
     // GETTERS & SETTERS
@@ -73,5 +90,21 @@ public class User {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    public List<BankTransaction> getBankTransactions() {
+        return bankTransactions;
+    }
+
+    public void setBankTransactions(List<BankTransaction> bankTransactions) {
+        this.bankTransactions = bankTransactions;
+    }
+
+    public List<Connection> getFriendsList() {
+        return friendsList;
+    }
+
+    public void setFriendsList(List<Connection> friendsList) {
+        this.friendsList = friendsList;
     }
 }
