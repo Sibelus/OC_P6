@@ -21,4 +21,9 @@ public class BankAccountService implements IBankAccountService{
     public Optional<BankAccount> getBankAccountById(Integer id) {
         return bankAccountRepository.findById(id);
     }
+
+    @Override
+    public BankAccount addBankAccount(BankAccount bankAccount) {
+        return bankAccountRepository.save(bankAccount);
+    }
 }
