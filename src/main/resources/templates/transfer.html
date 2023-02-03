@@ -22,5 +22,25 @@
         </form>
     </div>
 
+    <div align="center" th:if="${newFriend != null}">
+        <div th:text="${username}" />
+    </div>
+
+    <h2 class="h2">friend list</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="friend: ${frindList}">
+            <td><span th:text="${friend.firstname}"> Prénom </span></td>
+            <td><span th:text="${friend.lastname}"> Nom </span></td>
+        </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>
