@@ -17,7 +17,7 @@ public class BankAccount {
     private String name;
 
     @Column(name = "amount")
-    private float amount;
+    private int amount;
 
 
     // GETTERS & SETTERS
@@ -49,7 +49,7 @@ public class BankAccount {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 }

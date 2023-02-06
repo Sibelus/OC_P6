@@ -17,7 +17,7 @@ public class InAppTransaction {
     private int receiverId;
 
     @Column(name = "amount")
-    private float amount;
+    private int amount;
 
     @Column(name = "comment")
     private String comment;
@@ -55,7 +55,7 @@ public class InAppTransaction {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

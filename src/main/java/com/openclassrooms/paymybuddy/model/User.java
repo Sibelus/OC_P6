@@ -26,7 +26,7 @@ public class User {
     private String lastname;
 
     @Column(name = "amount")
-    private float amount;
+    private int amount;
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -88,7 +88,7 @@ public class User {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
