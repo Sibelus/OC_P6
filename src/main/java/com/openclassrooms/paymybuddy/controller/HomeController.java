@@ -3,8 +3,6 @@ package com.openclassrooms.paymybuddy.controller;
 import com.openclassrooms.paymybuddy.model.User;
 import com.openclassrooms.paymybuddy.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +11,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @Autowired
-    IUserService iUserService;
+    private IUserService iUserService;
 
     @GetMapping("/home")
     public String welcomePage(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Iterable<User> users = iUserService.getUsers();
+        String currentUserEmail = iUserService.getCurrentUserEmail();
+        User currentUser = iUserService.findByEmail(currentUserEmail).get();
+        String welcomMessage = "Welcom " + currentUser.getFirstname() + " " + currentUser.getLastname();
 
-        model.addAttribute("username", auth.getPrincipal());
         model.addAttribute("users", users);
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("welcomMessage", welcomMessage);
         return "home";
     }
 }

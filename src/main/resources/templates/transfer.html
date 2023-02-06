@@ -2,7 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>home</title>
+    <title>Transfer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -12,13 +15,22 @@
         <button type="button">LOGOUT</button>
     </a>
 
+    <div class = "navigation">
+        <a th:href="@{/home}">PAY MY BUDDY</a><br />
+        <a th:href="@{/home}">HOME</a><br />
+        <a th:href="@{/transfer}">TRANSFER</a><br />
+        <a th:href="@{/profile}">PROFILE</a><br />
+        <a th:href="@{/contact}">CONTACT</a><br />
+        <a th:href="@{/logout}">LOGOUT</a><br />
+    </div>
+
 
     <div class="container">
-        <form th:action="@{/transfer_newFriend}" method="POST" class="form-signin">
+        <form method="post" th:action="@{/transfer_newFriend}" th:object="${email}">
             <h3 class="form-signin-heading">ADD NEW FRIEND</h3><br/>
 
-            <input type="text" th:placeholder="newFriend" id="newFriend" name="newFriend" class="form-control" /> <br/>
-            <button type="Submit" th:text="search" class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" ></button>
+            <input type="text" th:placeholder="newFriend" id="newFriend" name="newFriend" class="form-control" /><br/>
+            <button type="Submit" th:text="search" class="btn btn-lg btn-primary btn-block" ></button>
         </form>
     </div>
 
@@ -35,7 +47,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="friend: ${frindList}">
+        <tr th:each="friend: ${friendList}">
             <td><span th:text="${friend.firstname}"> Prénom </span></td>
             <td><span th:text="${friend.lastname}"> Nom </span></td>
         </tr>

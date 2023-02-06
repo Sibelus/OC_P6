@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>Welcome !</h1>
-    <br />
+    <h1><div th:text="${welcomMessage}" /></h1><br />
+
     <a th:href="@{/logout}">
         <button type="button">LOGOUT</button>
-    </a>
+    </a><br />
 
-    <a th:href="@{/transfer}">TRANSFER MONEY TO FRIEND</a>
-
-    <div align="center" th:if="${username != null}">
-        <div th:text="${username}" />
+    <div class = "navigation">
+        <a th:href="@{/home}">PAY MY BUDDY</a><br />
+        <a th:href="@{/home}">HOME</a><br />
+        <a th:href="@{/transfer}">TRANSFER</a><br />
+        <a th:href="@{/profile}">PROFILE</a><br />
+        <a th:href="@{/contact}">CONTACT</a><br />
+        <a th:href="@{/logout}">LOGOUT</a><br />
     </div>
 
-    <h2 class="h2">Liste des employées</h2>
+    <h2 class="h2">register user list</h2>
     <table>
         <thead>
         <tr>
