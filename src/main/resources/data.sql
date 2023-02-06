@@ -12,7 +12,7 @@ CREATE TABLE user (
 `password` VARCHAR(100) NOT NULL,
 `firstname` VARCHAR(100) NOT NULL,
 `lastname` VARCHAR(100) NOT NULL,
-`amount` float NOT NULL,
+`amount` INTEGER,
 PRIMARY KEY (`user_id`)
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE bank_account (
 `bank_id` INTEGER NOT NULL AUTO_INCREMENT,
 `user_id` INTEGER NOT NULL,
 `name` VARCHAR(100) NOT NULL,
-`amount` float,
+`amount` INTEGER,
 PRIMARY KEY (`bank_id`),
 FOREIGN KEY (`user_id`) REFERENCES user(`user_id`)
 );
@@ -32,9 +32,10 @@ FOREIGN KEY (`user_id`) REFERENCES user(`user_id`)
 DROP TABLE IF EXISTS `connection`;
 
 CREATE TABLE connection (
-user_id INTEGER NOT NULL,
-friend_id INTEGER NOT NULL,
-PRIMARY KEY (`user_id`, `friend_id`),
+`connection_id` INTEGER NOT NULL AUTO_INCREMENT,
+`user_id` INTEGER NOT NULL,
+`friend_id` INTEGER NOT NULL,
+PRIMARY KEY (`connection_id`),
 FOREIGN KEY (`user_id`) REFERENCES user(`user_id`),
 FOREIGN KEY (`friend_id`) REFERENCES user(`user_id`)
 );
@@ -46,24 +47,24 @@ CREATE TABLE in_app_transaction (
 `transaction_id` INTEGER NOT NULL AUTO_INCREMENT,
 `sender_id` INTEGER NOT NULL,
 `receiver_id` INTEGER NOT NULL,
-`amount` FLOAT NOT NULL,
+`amount` INTEGER NOT NULL,
 `comment` VARCHAR(250),
 `fee` FLOAT NOT NULL,
 PRIMARY KEY (`transaction_id`),
-FOREIGN KEY (`sender_id`) REFERENCES connection(`user_id`),
-FOREIGN KEY (`receiver_id`) REFERENCES connection(`friend_id`)
+FOREIGN KEY (`sender_id`) REFERENCES user(`user_id`),
+FOREIGN KEY (`receiver_id`) REFERENCES user(`user_id`)
 );
 
 -- bank_transaction
 DROP TABLE IF EXISTS `bank_transaction`;
 
 CREATE TABLE bank_transaction (
-transaction_id INTEGER NOT NULL AUTO_INCREMENT,
-user_id INTEGER NOT NULL,
-bank_id INTEGER NOT NULL,
-amount FLOAT NOT NULL,
-comment VARCHAR(250),
-fee FLOAT NOT NULL,
+`transaction_id` INTEGER NOT NULL AUTO_INCREMENT,
+`user_id` INTEGER NOT NULL,
+`bank_id` INTEGER NOT NULL,
+`amount` INTEGER NOT NULL,
+`comment` VARCHAR(250),
+`fee` FLOAT NOT NULL,
 PRIMARY KEY (`transaction_id`),
 FOREIGN KEY (`user_id`) REFERENCES user(`user_id`),
 FOREIGN KEY (`bank_id`) REFERENCES bank_account(`bank_id`)
