@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
@@ -26,19 +24,4 @@ public class LoginController {
         model.addAttribute("user", new User());
         return "login";
     }
-
-    @GetMapping("/createAccount")
-    public String createAccountForm(Model model) {
-        model.addAttribute("user", new User());
-        return "createAccount";
-    }
-
-    @PostMapping("/createAccount")
-    public String createAccountSubmit(@ModelAttribute User user, Model model) {
-        model.addAttribute("user", user);
-        iUserService.addUser(user);
-        return "login";
-    }
-
-
 }
