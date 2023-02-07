@@ -16,8 +16,7 @@ public class HomeController {
     @GetMapping("/home")
     public String welcomePage(Model model) {
         Iterable<User> users = iUserService.getUsers();
-        String currentUserEmail = iUserService.getCurrentUserEmail();
-        User currentUser = iUserService.findByEmail(currentUserEmail).get();
+        User currentUser = iUserService.getCurrentUser();
         String welcomMessage = "Welcom " + currentUser.getFirstname() + " " + currentUser.getLastname();
 
         model.addAttribute("users", users);
