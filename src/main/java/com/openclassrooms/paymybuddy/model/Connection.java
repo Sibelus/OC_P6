@@ -7,41 +7,49 @@ import jakarta.persistence.*;
 public class Connection {
 
     @Id
-    @Column(name = "connection_id")
-    private int connectionId;
+    @Column(name = "id")
+    private int id;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "user_id")
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(name = "friend_id")
-    private int friendId;
+    @ManyToOne()
+    @JoinColumn(name = "friend_id")
+    private User friend;
 
 
     // GETTERS & SETTERS
-
     public int getConnectionId() {
-        return connectionId;
+        return id;
     }
 
     public void setConnectionId(int connectionId) {
-        this.connectionId = connectionId;
+        this.id = connectionId;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getFriendId() {
-        return friendId;
+    public User getFriend() {
+        return friend;
     }
 
-    public void setFriendId(int friendId) {
-        this.friendId = friendId;
+    public void setFriend(User friend) {
+        this.friend = friend;
+    }
+
+    @Override
+    public String toString() {
+        return "Connection{" +
+                "connectionId=" + id +
+                ", user=" + user +
+                ", friend=" + friend +
+                '}';
     }
 }

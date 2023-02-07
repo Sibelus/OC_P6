@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 public class BankAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bank_id")
-    private int bankId;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "user_id")
     private int userId;
@@ -21,12 +21,12 @@ public class BankAccount {
 
 
     // GETTERS & SETTERS
-    public int getBankId() {
-        return bankId;
+    public int getId() {
+        return id;
     }
 
-    public void setBankId(int bankId) {
-        this.bankId = bankId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUserId() {
@@ -51,5 +51,17 @@ public class BankAccount {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+
+    //TO STRING
+    @Override
+    public String toString() {
+        return "BankAccount{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", name='" + name + '\'' +
+                ", amount=" + amount +
+                '}';
     }
 }

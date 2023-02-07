@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 public class InAppTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transaction_id")
-    private int transactionId;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "sender_id")
     private int senderId;
@@ -28,11 +28,11 @@ public class InAppTransaction {
 
     // GETTERS & SETTERS
     public int getTransactionId() {
-        return transactionId;
+        return id;
     }
 
     public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
+        this.id = transactionId;
     }
 
     public int getSenderId() {
@@ -73,5 +73,18 @@ public class InAppTransaction {
 
     public void setFee(float fee) {
         this.fee = fee;
+    }
+
+    //TO STRING
+    @Override
+    public String toString() {
+        return "InAppTransaction{" +
+                "id=" + id +
+                ", senderId=" + senderId +
+                ", receiverId=" + receiverId +
+                ", amount=" + amount +
+                ", comment='" + comment + '\'' +
+                ", fee=" + fee +
+                '}';
     }
 }

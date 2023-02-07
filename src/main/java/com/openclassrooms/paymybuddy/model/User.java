@@ -10,8 +10,8 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "email")
     private String email;
@@ -38,18 +38,20 @@ public class User {
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "friend_id")
+            fetch = FetchType.EAGER,
+            mappedBy = "user")
     List<Connection> friendsList = new ArrayList<>();
 
 
     // GETTERS & SETTERS
-    public int getUserId() {
-        return userId;
+
+
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -106,5 +108,21 @@ public class User {
 
     public void setFriendsList(List<Connection> friendsList) {
         this.friendsList = friendsList;
+    }
+
+
+    //TO STRING
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", amount=" + amount +
+                ", bankTransactions=" + bankTransactions +
+                ", friendsList=" + friendsList +
+                '}';
     }
 }
