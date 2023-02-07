@@ -44,10 +44,11 @@ public class Connection {
         this.friend = friend;
     }
 
+    //TO STRING
     @Override
     public String toString() {
         return "Connection{" +
-                "connectionId=" + id +
+                "id=" + id +
                 ", user=" + user +
                 ", friend=" + friend +
                 '}';
