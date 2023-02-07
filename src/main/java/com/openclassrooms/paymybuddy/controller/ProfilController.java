@@ -15,8 +15,7 @@ public class ProfilController {
 
     @GetMapping("/profile")
     public String loginPage(Model model) {
-        String currentUserEmail = iUserService.getCurrentUserEmail();
-        User currentUser = iUserService.findByEmail(currentUserEmail).get();
+        User currentUser = iUserService.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
         return "profile";
     }
