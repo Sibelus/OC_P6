@@ -6,21 +6,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
 </head>
 <body>
+    <div class="container">
+        <div class = "navigation">
+            <a th:href="@{/home}">PAY MY BUDDY</a>
+            <a th:href="@{/home}">HOME</a>
+            <a th:href="@{/transfer}">TRANSFER</a>
+            <a th:href="@{/profile}">PROFILE</a>
+            <a th:href="@{/contact}">CONTACT</a>
+            <a th:href="@{/logout}">LOGOUT</a>
+        </div>
 
-<div class = "navigation">
-    <a th:href="@{/home}">PAY MY BUDDY</a><br />
-    <a th:href="@{/home}">HOME</a><br />
-    <a th:href="@{/transfer}">TRANSFER</a><br />
-    <a th:href="@{/profile}">PROFILE</a><br />
-    <a th:href="@{/contact}">CONTACT</a><br />
-    <a th:href="@{/logout}">LOGOUT</a><br />
-</div>
+        <h1>CONTACT</h1>
 
-<h1>CONTACT</h1>
-
-<p>My contacts</p>
-
+        <p>My contacts</p>
+    </div>
 </body>
 </html>

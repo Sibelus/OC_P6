@@ -6,53 +6,45 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
 </head>
 <body>
-
-    <h1>TRANSFER</h1>
-    <br />
-    <a th:href="@{/logout}">
-        <button type="button">LOGOUT</button>
-    </a>
-
-    <div class = "navigation">
-        <a th:href="@{/home}">PAY MY BUDDY</a><br />
-        <a th:href="@{/home}">HOME</a><br />
-        <a th:href="@{/transfer}">TRANSFER</a><br />
-        <a th:href="@{/profile}">PROFILE</a><br />
-        <a th:href="@{/contact}">CONTACT</a><br />
-        <a th:href="@{/logout}">LOGOUT</a><br />
-    </div>
-
-
     <div class="container">
-        <form method="post" th:action="@{/transfer_newFriend}" th:object="${email}">
-            <h3 class="form-signin-heading">ADD NEW FRIEND</h3><br/>
+        <div class = "navigation">
+            <a th:href="@{/home}">PAY MY BUDDY</a>
+            <a th:href="@{/home}">HOME</a>
+            <a th:href="@{/transfer}">TRANSFER</a>
+            <a th:href="@{/profile}">PROFILE</a>
+            <a th:href="@{/contact}">CONTACT</a>
+            <a th:href="@{/logout}">LOGOUT</a>
+        </div>
 
-            <input type="text" th:placeholder="newFriend" id="newFriend" name="newFriend" class="form-control" /><br/>
-            <button type="Submit" th:text="search" class="btn btn-lg btn-primary btn-block" ></button>
-        </form>
+        <h1>TRANSFER</h1><br/>
+
+        <div class="container">
+            <form method="post" th:action="@{/transfer_newFriend}">
+                <h3 class="form-signin-heading">ADD NEW FRIEND</h3><br/>
+
+                <input type="text" th:placeholder="newFriend" id="email" name="email" class="form-control" /><br/>
+                <button type="Submit" th:text="search" class="btn btn-lg btn-primary btn-block" ></button>
+            </form>
+        </div>
+
+        <h2 class="h2">friend list</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="f: ${friendList}">
+                <td><span th:text="${f.friend.firstname}"> Prénom </span></td>
+                <td><span th:text="${f.friend.lastname}"> Nom </span></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-
-    <div align="center" th:if="${newFriend != null}">
-        <div th:text="${username}" />
-    </div>
-
-    <h2 class="h2">friend list</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Prénom</th>
-            <th>Nom</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="friend: ${friendList}">
-            <td><span th:text="${friend.firstname}"> Prénom </span></td>
-            <td><span th:text="${friend.lastname}"> Nom </span></td>
-        </tr>
-        </tbody>
-    </table>
-
 </body>
 </html>

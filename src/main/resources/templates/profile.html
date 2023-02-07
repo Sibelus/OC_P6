@@ -6,22 +6,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
 </head>
 <body>
-<div class = "navigation">
-    <a th:href="@{/home}">PAY MY BUDDY</a><br />
-    <a th:href="@{/home}">HOME</a><br />
-    <a th:href="@{/transfer}">TRANSFER</a><br />
-    <a th:href="@{/profile}">PROFILE</a><br />
-    <a th:href="@{/contact}">CONTACT</a><br />
-    <a th:href="@{/logout}">LOGOUT</a><br />
-</div>
+<div class="container">
+    <div class = "navigation">
+        <a th:href="@{/home}">PAY MY BUDDY</a>
+        <a th:href="@{/home}">HOME</a>
+        <a th:href="@{/transfer}">TRANSFER</a>
+        <a th:href="@{/profile}">PROFILE</a>
+        <a th:href="@{/contact}">CONTACT</a>
+        <a th:href="@{/logout}">LOGOUT</a>
+    </div>
 
+    <h1>PROFILE</h1>
 
     <p>Firstname : <span th:text="${currentUser.firstname}"></span></p>
     <p>Lastname : <span th:text="${currentUser.lastname}"></span></p>
     <p>eMail : <span th:text="${currentUser.email}"></span></p>
     <p>Amount : <span th:text="${currentUser.amount}"></span></p>
-
+</div>
 </body>
 </html>

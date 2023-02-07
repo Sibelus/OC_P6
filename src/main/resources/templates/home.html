@@ -1,43 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
 </head>
 <body>
-    <h1><div th:text="${welcomMessage}" /></h1><br />
+    <div class="container">
+        <div class = "navigation">
+            <a th:href="@{/home}">PAY MY BUDDY</a>
+            <a th:href="@{/home}">HOME</a>
+            <a th:href="@{/transfer}">TRANSFER</a>
+            <a th:href="@{/profile}">PROFILE</a>
+            <a th:href="@{/contact}">CONTACT</a>
+            <a th:href="@{/logout}">LOGOUT</a>
+        </div>
 
-    <a th:href="@{/logout}">
-        <button type="button">LOGOUT</button>
-    </a><br />
+        <h1>HOME</h1><br/>
 
-    <div class = "navigation">
-        <a th:href="@{/home}">PAY MY BUDDY</a><br />
-        <a th:href="@{/home}">HOME</a><br />
-        <a th:href="@{/transfer}">TRANSFER</a><br />
-        <a th:href="@{/profile}">PROFILE</a><br />
-        <a th:href="@{/contact}">CONTACT</a><br />
-        <a th:href="@{/logout}">LOGOUT</a><br />
+        <h2><div th:text="${welcomMessage}" /></h2><br />
     </div>
-
-    <h2 class="h2">register user list</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Prénom</th>
-            <th>Nom</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user: ${users}">
-            <td><span th:text="${user.firstname}"> Prénom </span></td>
-            <td><span th:text="${user.lastname}"> Nom </span></td>
-        </tr>
-        </tbody>
-    </table>
-
 </body>
 </html>
