@@ -1,0 +1,23 @@
+form
+{
+    width:60%;
+    margin:auto;
+}
+
+p
+{
+    font-size: 20;
+    color: #FF1C19;
+}
+
+
+/* ----- classes ----- */
+
+.navigation
+{
+    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
