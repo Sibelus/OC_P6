@@ -112,6 +112,7 @@ public class User {
 
 
     //TO STRING
+
     @Override
     public String toString() {
         return "User{" +
@@ -122,7 +123,6 @@ public class User {
                 ", lastname='" + lastname + '\'' +
                 ", amount=" + amount +
                 ", bankTransactions=" + bankTransactions +
-                ", friendsList=" + friendsList +
                 '}';
     }
 }
