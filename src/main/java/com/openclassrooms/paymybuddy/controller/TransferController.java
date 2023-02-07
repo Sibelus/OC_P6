@@ -1,5 +1,6 @@
 package com.openclassrooms.paymybuddy.controller;
 
+import com.openclassrooms.paymybuddy.model.Connection;
 import com.openclassrooms.paymybuddy.model.User;
 import com.openclassrooms.paymybuddy.service.IConnectionService;
 import com.openclassrooms.paymybuddy.service.IUserService;
@@ -7,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TransferController {
@@ -23,17 +24,17 @@ public class TransferController {
 
     @GetMapping("/transfer")
     public String transferPage(Model model) {
-        String email = "";
-        List<User> friendList = new ArrayList<>();
-        model.addAttribute("email", email);
-        model.addAttribute("friendList", friendList);
+        User currentUser = iUserService.getCurrentUser();
+        List<Connection> friendsList = iConnectionService.getFriendshipList(currentUser.getId());
+        model.addAttribute("friendList", friendsList);
         return "transfer";
     }
 
     @PostMapping("/transfer_newFriend")
-    public String newFriendSubmit(@ModelAttribute String email, Model model) {
+    public String newFriendSubmit(@RequestParam String email, Model model) {
         model.addAttribute("email", email);
-        //iConnectionService.addFriendship(email);
+        Optional<User> friend = iUserService.findByEmail(email);
+        iConnectionService.addFriendship(email);
         return "transfer";
     }
 }
