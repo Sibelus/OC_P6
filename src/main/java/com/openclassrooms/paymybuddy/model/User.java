@@ -38,8 +38,8 @@ public class User {
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+            fetch = FetchType.EAGER,
+            mappedBy = "user")
     List<BankTransaction> bankTransactions = new ArrayList<>();
 
     @OneToMany(
@@ -51,8 +51,6 @@ public class User {
 
 
     // GETTERS & SETTERS
-
-
     public int getId() {
         return id;
     }
@@ -93,12 +91,20 @@ public class User {
         this.lastname = lastname;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return amount;
     }
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public List<BankAccount> getBankAccountList() {
+        return bankAccountList;
+    }
+
+    public void setBankAccountList(List<BankAccount> bankAccountList) {
+        this.bankAccountList = bankAccountList;
     }
 
     public List<BankTransaction> getBankTransactions() {
@@ -117,26 +123,16 @@ public class User {
         this.friendsList = friendsList;
     }
 
-    public List<BankAccount> getBankAccountList() {
-        return bankAccountList;
-    }
-
-    public void setBankAccountList(List<BankAccount> bankAccountList) {
-        this.bankAccountList = bankAccountList;
-    }
 
     //TO STRING
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", amount=" + amount +
-                ", bankTransactions=" + bankTransactions +
                 '}';
     }
 }
