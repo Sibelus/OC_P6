@@ -1,7 +1,9 @@
 package com.openclassrooms.paymybuddy.controller;
 
 import com.openclassrooms.paymybuddy.model.BankAccount;
+import com.openclassrooms.paymybuddy.model.User;
 import com.openclassrooms.paymybuddy.service.IBankAccountService;
+import com.openclassrooms.paymybuddy.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,8 @@ public class AddBankAccountController {
 
     @Autowired
     IBankAccountService iBankAccountService;
+    @Autowired
+    IUserService iUserService;
 
     @GetMapping("/addBankAccount")
     public String createAccountForm(Model model) {
@@ -25,6 +29,8 @@ public class AddBankAccountController {
     public String createAccountSubmit(@ModelAttribute BankAccount bankAccount, Model model) {
         model.addAttribute("bankAccount", bankAccount);
         iBankAccountService.addBankAccount(bankAccount);
+        User currentUser = iUserService.getCurrentUser();
+        model.addAttribute("currentUser", currentUser);
         return "profile";
     }
 }
