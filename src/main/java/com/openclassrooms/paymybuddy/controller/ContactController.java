@@ -30,8 +30,12 @@ public class ContactController {
         return "contact";
     }
 
-    @PostMapping("/contact_newFriend")
+    @PostMapping("/contact")
     public String newFriendSubmit(@RequestParam String email, Model model) {
+        User currentUser = iUserService.getCurrentUser();
+        List<Connection> friendsList = iConnectionService.getFriendshipList(currentUser.getId());
+        model.addAttribute("friendList", friendsList);
+
         model.addAttribute("email", email);
         Optional<User> friend = iUserService.findByEmail(email);
         iConnectionService.addFriendship(email);
