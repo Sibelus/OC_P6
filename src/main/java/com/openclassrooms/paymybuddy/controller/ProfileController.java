@@ -8,13 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ProfilController {
+public class ProfileController {
 
     @Autowired
     IUserService iUserService;
 
     @GetMapping("/profile")
-    public String loginPage(Model model) {
+    public String profilePage(Model model) {
         User currentUser = iUserService.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
         return "profile";
