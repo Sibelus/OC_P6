@@ -2,6 +2,9 @@ package com.openclassrooms.paymybuddy.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "bank_account")
 public class BankAccount {
@@ -18,6 +21,13 @@ public class BankAccount {
 
     @Column(name = "amount")
     private int amount;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER,
+            mappedBy = "bank")
+    List<BankTransaction> bankTransactions = new ArrayList<>();
 
 
     // GETTERS & SETTERS
@@ -45,7 +55,7 @@ public class BankAccount {
         this.name = name;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -53,6 +63,13 @@ public class BankAccount {
         this.amount = amount;
     }
 
+    public List<BankTransaction> getBankTransactions() {
+        return bankTransactions;
+    }
+
+    public void setBankTransactions(List<BankTransaction> bankTransactions) {
+        this.bankTransactions = bankTransactions;
+    }
 
     //TO STRING
     @Override
@@ -62,6 +79,7 @@ public class BankAccount {
                 ", userId=" + userId +
                 ", name='" + name + '\'' +
                 ", amount=" + amount +
+                ", bankTransactions=" + bankTransactions +
                 '}';
     }
 }
