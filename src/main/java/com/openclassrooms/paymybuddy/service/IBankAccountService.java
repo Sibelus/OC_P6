@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface IBankAccountService {
     Iterable<BankAccount> getBankAccounts();
     Optional<BankAccount> getBankAccountById(Integer id);
-    BankAccount addBankAccount(BankAccount bankAccount);
+    void addBankAccount(BankAccount bankAccount);
 }

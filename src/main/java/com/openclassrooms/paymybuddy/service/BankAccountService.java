@@ -11,6 +11,8 @@ import java.util.Optional;
 public class BankAccountService implements IBankAccountService{
     @Autowired
     BankAccountRepository bankAccountRepository;
+    @Autowired
+    IUserService iUserService;
 
     @Override
     public Iterable<BankAccount> getBankAccounts() {
@@ -23,7 +25,9 @@ public class BankAccountService implements IBankAccountService{
     }
 
     @Override
-    public BankAccount addBankAccount(BankAccount bankAccount) {
-        return bankAccountRepository.save(bankAccount);
+    public void addBankAccount(BankAccount bankAccount) {
+        bankAccount.setUserId(iUserService.getCurrentUser().getId());
+        bankAccount.setAmount(1000);
+        bankAccountRepository.save(bankAccount);
     }
 }
