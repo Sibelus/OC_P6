@@ -31,20 +31,9 @@
         </div>
 
         <h2 class="h2">My contacts</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Prénom</th>
-                <th>Nom</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="f: ${friendList}">
-                <td><span th:text="${f.friend.firstname}"> Prénom </span></td>
-                <td><span th:text="${f.friend.lastname}"> Nom </span></td>
-            </tr>
-            </tbody>
-        </table>
+        <ul th:each="f: ${friendList}">
+            <li th:text="${f.friend.firstname} + ' ' + ${f.friend.lastname}"></li>
+        </ul>
     </div>
 </body>
 </html>
