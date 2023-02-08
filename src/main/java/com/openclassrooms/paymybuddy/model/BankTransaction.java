@@ -10,11 +10,13 @@ public class BankTransaction {
     @Column(name = "id")
     private int id;
 
+    @ManyToOne()
     @Column(name = "user_id")
-    private int userId;
+    private User user;
 
+    @ManyToOne()
     @Column(name = "bank_id")
-    private int bankId;
+    private BankAccount bank;
 
     @Column(name = "amount")
     private int amount;
@@ -27,31 +29,31 @@ public class BankTransaction {
 
 
     // GETTERS & SETTERS
-    public int getTransactionId() {
+    public int getId() {
         return id;
     }
 
-    public void setTransactionId(int transactionId) {
-        this.id = transactionId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getBankId() {
-        return bankId;
+    public BankAccount getBank() {
+        return bank;
     }
 
-    public void setBankId(int bankId) {
-        this.bankId = bankId;
+    public void setBank(BankAccount bank) {
+        this.bank = bank;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -80,8 +82,8 @@ public class BankTransaction {
     public String toString() {
         return "BankTransaction{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", bankId=" + bankId +
+                ", user=" + user +
+                ", bank=" + bank +
                 ", amount=" + amount +
                 ", comment='" + comment + '\'' +
                 ", fee=" + fee +
