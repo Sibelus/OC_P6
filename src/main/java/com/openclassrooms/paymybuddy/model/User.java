@@ -33,6 +33,13 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    List<BankAccount> bankAccountList = new ArrayList<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     List<BankTransaction> bankTransactions = new ArrayList<>();
 
     @OneToMany(
@@ -110,6 +117,13 @@ public class User {
         this.friendsList = friendsList;
     }
 
+    public List<BankAccount> getBankAccountList() {
+        return bankAccountList;
+    }
+
+    public void setBankAccountList(List<BankAccount> bankAccountList) {
+        this.bankAccountList = bankAccountList;
+    }
 
     //TO STRING
 
