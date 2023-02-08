@@ -25,6 +25,13 @@
     <p>Lastname : <span th:text="${currentUser.lastname}"></span></p>
     <p>eMail : <span th:text="${currentUser.email}"></span></p>
     <p>Amount : <span th:text="${currentUser.amount}"></span></p>
+
+    <p>My bank accounts :</p>
+    <ul th:each="bankAccount: ${currentUser.bankAccountList}">
+        <li><span th:text="${bankAccount.name} + ' ' + ${bankAccount.amount}"></li>
+    </ul>
+
+    <a th:href="@{/addBankAccount}">Add bank account</a>
 </div>
 </body>
 </html>
