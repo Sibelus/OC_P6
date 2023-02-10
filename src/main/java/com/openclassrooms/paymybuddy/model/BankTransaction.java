@@ -11,12 +11,12 @@ public class BankTransaction {
     private int id;
 
     @ManyToOne()
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne()
-    @Column(name = "bank_id")
-    private BankAccount bank;
+    @JoinColumn(name = "bank_id")
+    private BankAccount bankAccount;
 
     @Column(name = "amount")
     private int amount;
@@ -45,12 +45,12 @@ public class BankTransaction {
         this.user = user;
     }
 
-    public BankAccount getBank() {
-        return bank;
+    public BankAccount getBankAccount() {
+        return bankAccount;
     }
 
-    public void setBank(BankAccount bank) {
-        this.bank = bank;
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
     }
 
     public int getAmount() {
@@ -83,7 +83,7 @@ public class BankTransaction {
         return "BankTransaction{" +
                 "id=" + id +
                 ", user=" + user +
-                ", bank=" + bank +
+                ", bankAccount=" + bankAccount +
                 ", amount=" + amount +
                 ", comment='" + comment + '\'' +
                 ", fee=" + fee +
