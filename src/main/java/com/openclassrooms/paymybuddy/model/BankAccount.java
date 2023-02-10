@@ -26,7 +26,7 @@ public class BankAccount {
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER,
-            mappedBy = "bank")
+            mappedBy = "bankAccount")
     List<BankTransaction> bankTransactions = new ArrayList<>();
 
 
