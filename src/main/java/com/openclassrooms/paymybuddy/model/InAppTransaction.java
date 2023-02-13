@@ -10,11 +10,13 @@ public class InAppTransaction {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "sender_id")
-    private int senderId;
+    @ManyToOne()
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
-    @Column(name = "receiver_id")
-    private int receiverId;
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
+    private User receiver;
 
     @Column(name = "amount")
     private int amount;
@@ -27,31 +29,31 @@ public class InAppTransaction {
 
 
     // GETTERS & SETTERS
-    public int getTransactionId() {
+    public int getId() {
         return id;
     }
 
-    public void setTransactionId(int transactionId) {
-        this.id = transactionId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getSenderId() {
-        return senderId;
+    public User getSender() {
+        return sender;
     }
 
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
-    public int getReceiverId() {
-        return receiverId;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setReceiverId(int receiverId) {
-        this.receiverId = receiverId;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
-    public float getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -76,12 +78,13 @@ public class InAppTransaction {
     }
 
     //TO STRING
+
     @Override
     public String toString() {
         return "InAppTransaction{" +
                 "id=" + id +
-                ", senderId=" + senderId +
-                ", receiverId=" + receiverId +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
                 ", amount=" + amount +
                 ", comment='" + comment + '\'' +
                 ", fee=" + fee +
