@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
+</head>
+<body>
+<div class="container">
+    <div class = "navigation">
+        <a th:href="@{/home}">PAY MY BUDDY</a>
+        <a th:href="@{/home}">HOME</a>
+        <a th:href="@{/transfer}">TRANSFER</a>
+        <a th:href="@{/profile}">PROFILE</a>
+        <a th:href="@{/contact}">CONTACT</a>
+        <a th:href="@{/logout}">LOGOUT</a>
+    </div>
+
+    <h1>BANK TRANSACTION</h1>
+
+    <form method="post" th:action="@{/bankTransaction_bankToUser}" th:object="${bankTransaction}">
+        <h3 class="form-signin-heading">CREDIT MY ACCOUNT</h3>
+
+        <select th:field="*{bankAccount}">
+            <option th:each="bankAccount: ${bankAccounts}" th:value="${bankAccount.id}" th:text="${bankAccount.name} + ' ' + ${bankAccount.amount}"/>
+        </select>
+        <input type="number" th:field="*{amount}" placeholder="250" class="form-control" /><br/>
+        <input type="text" th:field="*{comment}" placeholder="credit my account" class="form-control" /><br/>
+        <button type="submit" th:text="Create" class="btn btn-lg btn-primary btn-block"></button>
+    </form><br/>
+
+    <form method="post" th:action="@{/bankTransaction_userToBank}" th:object="${bankTransaction}">
+        <h3 class="form-signin-heading">SEND FOUNDS TO MY BANK</h3>
+
+        <select th:field="*{bankAccount}">
+            <option th:each="bankAccount: ${bankAccounts}" th:value="${bankAccount.id}" th:text="${bankAccount.name} + ' ' + ${bankAccount.amount}"/>
+        </select>
+        <input type="number" th:field="*{amount}" placeholder="250" class="form-control" /><br/>
+        <input type="text" th:field="*{comment}" placeholder="credit my account" class="form-control" /><br/>
+        <button type="submit" th:text="Create" class="btn btn-lg btn-primary btn-block"></button>
+    </form>
+
+</div>
+</body>
+</html>
