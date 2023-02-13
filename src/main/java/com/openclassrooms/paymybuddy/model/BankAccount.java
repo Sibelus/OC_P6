@@ -79,7 +79,6 @@ public class BankAccount {
                 ", userId=" + userId +
                 ", name='" + name + '\'' +
                 ", amount=" + amount +
-                ", bankTransactions=" + bankTransactions +
                 '}';
     }
 }
