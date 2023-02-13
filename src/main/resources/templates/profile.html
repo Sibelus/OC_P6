@@ -27,11 +27,13 @@
     <p>Amount : <span th:text="${currentUser.amount}"></span></p>
 
     <p>My bank accounts :</p>
+    <a th:href="@{/addBankAccount}">Add bank account</a><br/>
     <ul th:each="bankAccount: ${currentUser.bankAccountList}">
         <li><span th:text="${bankAccount.name} + ' ' + ${bankAccount.amount}"></li>
     </ul>
 
-    <a th:href="@{/addBankAccount}">Add bank account</a>
+    <a th:href="@{/bankTransaction}">Credit my account</a><br/>
+    <a th:href="@{/bankTransaction}">Get my money back</a>
 </div>
 </body>
 </html>
