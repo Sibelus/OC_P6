@@ -25,7 +25,7 @@ CREATE TABLE bank_account (
 `name` VARCHAR(100) NOT NULL,
 `amount` INTEGER,
 PRIMARY KEY (`id`),
-FOREIGN KEY (`user_id`) REFERENCES user(`id`)
+FOREIGN KEY (`user_id`) REFERENCES user(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- connection
@@ -51,8 +51,8 @@ CREATE TABLE in_app_transaction (
 `comment` VARCHAR(250),
 `fee` FLOAT NOT NULL,
 PRIMARY KEY (`id`),
-FOREIGN KEY (`sender_id`) REFERENCES user(`id`),
-FOREIGN KEY (`receiver_id`) REFERENCES user(`id`)
+FOREIGN KEY (`sender_id`) REFERENCES user(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`receiver_id`) REFERENCES user(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- bank_transaction
@@ -66,8 +66,8 @@ CREATE TABLE bank_transaction (
 `comment` VARCHAR(250),
 `fee` FLOAT NOT NULL,
 PRIMARY KEY (`id`),
-FOREIGN KEY (`user_id`) REFERENCES user(`id`),
-FOREIGN KEY (`bank_id`) REFERENCES bank_account(`id`)
+FOREIGN KEY (`user_id`) REFERENCES user(`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`bank_id`) REFERENCES bank_account(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
