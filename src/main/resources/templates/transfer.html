@@ -21,27 +21,48 @@
 
         <h1>TRANSFER</h1><br/>
 
-        <div class="container">
-            <form method="post" th:action="@{/transfer_newFriend}">
-                <h3 class="form-signin-heading">ADD NEW FRIEND</h3><br/>
+        <form method="post" th:action="@{/transfer}" th:object="${inAppTransaction}">
+            <h3 class="form-signin-heading">SEND MONEY TO FRIEND</h3>
 
-                <input type="text" th:placeholder="newFriend" id="email" name="email" class="form-control" /><br/>
-                <button type="Submit" th:text="search" class="btn btn-lg btn-primary btn-block" ></button>
-            </form>
-        </div>
+            <select th:field="*{receiver}">
+                <option th:each="f: ${friends}" type="number" th:value="${f.friend.id}" th:text="${f.friend.firstname} + ' ' + ${f.friend.lastname}" name="friendId"/>
+            </select>
+            <input th:field="*{amount}" type="number" placeholder="250" name="amount" class="form-control" /><br/>
+            <input th:field="*{comment}" type="text" name="comment" placeholder="send to my friend" class="form-control" /><br/>
+            <button type="submit" th:text="Send" class="btn btn-lg btn-primary btn-block"></button>
+        </form><br/>
 
-        <h2 class="h2">friend list</h2>
+        <h2 class="h2">My transactions</h2>
         <table>
             <thead>
             <tr>
-                <th>Prénom</th>
-                <th>Nom</th>
+                <th>Connection</th>
+                <th>Description</th>
+                <th>Amount</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="f: ${friendList}">
-                <td><span th:text="${f.friend.firstname}"> Prénom </span></td>
-                <td><span th:text="${f.friend.lastname}"> Nom </span></td>
+            <tr th:each="i: ${inAppTransactions}">
+                <td><span th:text="${i.receiver.firstname}"> Connection </span></td>
+                <td><span th:text="${i.comment}"> Description </span></td>
+                <td><span th:text="${i.amount}"> Amount </span></td>
+            </tr>
+            </tbody>
+        </table><br/>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Bank account</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="b: ${bankTransactions}">
+                <td><span th:text="${b.bankAccount.name}"> Connection </span></td>
+                <td><span th:text="${b.comment}"> Description </span></td>
+                <td><span th:text="${b.amount}"> Amount </span></td>
             </tr>
             </tbody>
         </table>
