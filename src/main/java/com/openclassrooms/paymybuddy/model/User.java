@@ -49,6 +49,13 @@ public class User {
             mappedBy = "user")
     List<Connection> friendsList = new ArrayList<>();
 
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER,
+            mappedBy = "sender")
+    List<InAppTransaction> inAppTransactions = new ArrayList<>();
+
 
     // GETTERS & SETTERS
     public int getId() {
@@ -123,7 +130,13 @@ public class User {
         this.friendsList = friendsList;
     }
 
+    public List<InAppTransaction> getInAppTransactions() {
+        return inAppTransactions;
+    }
 
+    public void setInAppTransactions(List<InAppTransaction> inAppTransactions) {
+        this.inAppTransactions = inAppTransactions;
+    }
     //TO STRING
 
     @Override
