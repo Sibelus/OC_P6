@@ -29,18 +29,17 @@ public class InAppTransactionService implements IInappTransactionService{
         User receiver = inAppTransaction.getReceiver();
         int amount = inAppTransaction.getAmount();
 
-        if(currentUser.getAmount() >= amount){
-            currentUser.setAmount(currentUser.getAmount() - amount);
-            receiver.setAmount(receiver.getAmount() + amount);
-            inAppTransaction.setFee(iFeeService.calculateFee(amount));
-
-            logger.debug("{} send {} to his friend {}", currentUser.getFirstname(),inAppTransaction.getAmount(), receiver.getFirstname());
-
-            inAppTransactionRepository.save(inAppTransaction);
-        } else {
-            logger.debug("{} try to send {} to his friend {}, but there is not enough money on his account", currentUser.getFirstname(),inAppTransaction.getAmount(), receiver.getFirstname());
+        if(currentUser.getAmount() < amount){
+            logger.error("insufficient amount, {} try to send {} and have only {}", currentUser.getFirstname(), amount, currentUser.getAmount());
+            throw new IllegalArgumentException("insufficient amount: you only have " + currentUser.getAmount());
         }
 
+        currentUser.setAmount(currentUser.getAmount() - amount);
+        receiver.setAmount(receiver.getAmount() + amount);
+        inAppTransaction.setFee(iFeeService.calculateFee(amount));
+        logger.debug("{} send {} to his friend {}", currentUser.getFirstname(),inAppTransaction.getAmount(), receiver.getFirstname());
+
+        inAppTransactionRepository.save(inAppTransaction);
     }
 
     /*

@@ -29,40 +29,40 @@ public class BankTransactionService implements IBankTransationService{
 
         User currentUser = bankTransaction.getUser();
         BankAccount bankAccount = bankTransaction.getBankAccount();
+        int amount = bankTransaction.getAmount();
 
-        if(bankAccount.getAmount() >= bankTransaction.getAmount()){
-            currentUser.setAmount(currentUser.getAmount() + bankTransaction.getAmount());
-            bankAccount.setAmount(bankAccount.getAmount() - bankTransaction.getAmount());
-            bankTransaction.setFee(iFeeService.calculateFee(bankTransaction.getAmount()));
-
-            logger.debug("{} send {} from his bank {}", currentUser.getFirstname(),bankTransaction.getAmount(), bankAccount);
-
-            bankTransactionRepository.save(bankTransaction);
-        } else {
-            logger.debug("{} try to send {} from his bank {}, but there is not enough money on his bank account", currentUser.getFirstname(),bankTransaction.getAmount(), bankAccount);
+        if(bankAccount.getAmount() < amount){
+            logger.error("{} try to send {} from his bank {}, but there is not enough money on his bank account", currentUser.getFirstname(),bankTransaction.getAmount(), bankAccount);
+            throw new IllegalArgumentException("insufficient amount: you only have " + bankAccount.getAmount() + " on your bank account");
         }
+
+        currentUser.setAmount(currentUser.getAmount() + bankTransaction.getAmount());
+        bankAccount.setAmount(bankAccount.getAmount() - bankTransaction.getAmount());
+        bankTransaction.setFee(iFeeService.calculateFee(bankTransaction.getAmount()));
+        logger.debug("{} send {} from his bank {}", currentUser.getFirstname(),bankTransaction.getAmount(), bankAccount);
+
+        bankTransactionRepository.save(bankTransaction);
     }
 
     @Override
     public void userToBank(BankTransaction bankTransaction) {
         User currentUser = bankTransaction.getUser();
         BankAccount bankAccount = bankTransaction.getBankAccount();
+        int amount = bankTransaction.getAmount();
 
-        if(currentUser.getAmount()>= bankTransaction.getAmount()){
-            currentUser.setAmount(currentUser.getAmount() - bankTransaction.getAmount());
-            bankAccount.setAmount(bankAccount.getAmount() + bankTransaction.getAmount());
-            bankTransaction.setFee(iFeeService.calculateFee(bankTransaction.getAmount()));
-            //Set amount of transaction to negative value -> help visualize exiting money from application
-            bankTransaction.setAmount(bankTransaction.getAmount()*(-1));
-
-            logger.debug("{} send {} to his bank {}", currentUser.getFirstname(),bankTransaction.getAmount(), bankAccount);
-
-            bankTransactionRepository.save(bankTransaction);
-        } else {
-            logger.debug("{} try to send {} to his bank {}, but there is not enough money on his account", currentUser.getFirstname(),bankTransaction.getAmount(), bankAccount);
+        if(currentUser.getAmount() < amount){
+            logger.error("{} try to send {} to his bank {}, but there is not enough money on his account", currentUser.getFirstname(),bankTransaction.getAmount(), bankAccount.getName());
+            throw new IllegalArgumentException("insufficient amount: you only have " + currentUser.getAmount() + " on your account");
         }
 
+        currentUser.setAmount(currentUser.getAmount() - bankTransaction.getAmount());
+        bankAccount.setAmount(bankAccount.getAmount() + bankTransaction.getAmount());
+        bankTransaction.setFee(iFeeService.calculateFee(bankTransaction.getAmount()));
+        //Set amount of transaction to negative value -> help visualize exiting money from application
+        bankTransaction.setAmount(bankTransaction.getAmount()*(-1));
+        logger.debug("{} send {} to his bank {}", currentUser.getFirstname(),bankTransaction.getAmount(), bankAccount);
 
+        bankTransactionRepository.save(bankTransaction);
     }
 
     @Override
