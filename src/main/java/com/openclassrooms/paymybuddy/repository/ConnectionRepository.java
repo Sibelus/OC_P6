@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ConnectionRepository extends JpaRepository<Connection, Integer> {
     List<Connection> findByUserId(int userId);
+
+    boolean existsByUserIdAndFriendId(int userId, int friendId);
 }
