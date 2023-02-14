@@ -9,5 +9,4 @@ import java.util.List;
 public interface IConnectionService {
     void addFriendship(String email);
     List<Connection> getFriendshipList(int currentUserId);
-    Connection getFriend();
 }
