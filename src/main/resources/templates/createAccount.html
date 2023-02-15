@@ -12,12 +12,13 @@
 <body>
     <div class="container">
         <form method="post" th:action="@{/createAccount}" th:object="${user}">
-            <h3 class="form-signin-heading">CREATE ACCOUNT</h3>
+            <h3 class="form-signin-heading">CREATE ACCOUNT</h3><br/>
 
-            <br/>
             <div align="center" th:if="${param.error}">
                 <p>Invalid username or password</p>
             </div>
+            <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+
             <input type="text" th:field="*{firstname}" placeholder="firstname" class="form-control" /><br/>
             <input type="text" th:field="*{lastname}" placeholder="lastname" class="form-control" /><br/>
             <input type="email" th:field="*{email}" placeholder="jdoe@mail.fr" class="form-control" /><br/>

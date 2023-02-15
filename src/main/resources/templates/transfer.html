@@ -21,6 +21,8 @@
 
         <h1>TRANSFER</h1><br/>
 
+        <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+
         <form method="post" th:action="@{/transfer}" th:object="${inAppTransaction}">
             <h3 class="form-signin-heading">SEND MONEY TO FRIEND</h3>
 

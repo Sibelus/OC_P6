@@ -21,6 +21,8 @@
 
     <h1>BANK TRANSACTION</h1>
 
+    <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+
     <form method="post" th:action="@{/bankTransaction_bankToUser}" th:object="${bankTransaction}">
         <h3 class="form-signin-heading">CREDIT MY ACCOUNT</h3>
 

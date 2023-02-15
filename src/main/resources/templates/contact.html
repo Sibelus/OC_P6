@@ -22,6 +22,8 @@
         <h1>CONTACT</h1>
 
         <div class="container">
+            <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+
             <form method="post" th:action="@{/contact}">
                 <h3 class="form-signin-heading">ADD NEW FRIEND</h3><br/>
 

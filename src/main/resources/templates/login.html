@@ -15,9 +15,8 @@
 
         <br/><br/>
         <form th:action="@{/login}" method="POST" class="form-signin">
-            <h3 class="form-signin-heading">LOGIN</h3>
+            <h3 class="form-signin-heading">LOGIN</h3><br/>
 
-            <br/>
             <div align="center" th:if="${param.error}">
                 <p>Invalid username or password</p>
             </div>
