@@ -3,6 +3,10 @@ package com.openclassrooms.paymybuddy.controller;
 import com.openclassrooms.paymybuddy.model.*;
 import com.openclassrooms.paymybuddy.service.IInappTransactionService;
 import com.openclassrooms.paymybuddy.service.IUserService;
+import com.openclassrooms.paymybuddy.service.exceptions.InsufficientAmountException;
+import com.openclassrooms.paymybuddy.service.exceptions.NegativeAmountException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +18,11 @@ import java.util.List;
 public class TransferController {
 
     @Autowired
-    IUserService iUserService;
+    private IUserService iUserService;
     @Autowired
-    IInappTransactionService iInappTransactionService;
+    private IInappTransactionService iInappTransactionService;
+    Logger logger = LoggerFactory.getLogger(TransferController.class);
+
 
     @GetMapping("/transfer")
     public String transferPage(Model model) {
@@ -48,28 +54,18 @@ public class TransferController {
         model.addAttribute("bankTransactions", bankTransactions);
 
         inAppTransaction.setSender(currentUser);
-        iInappTransactionService.sendMoneyToFriend(inAppTransaction);
-        return "transfer";
+        try {
+            iInappTransactionService.sendMoneyToFriend(inAppTransaction);
+            logger.debug("{} send {} to {}", currentUser.getFirstname(), inAppTransaction.getAmount(), inAppTransaction.getReceiver().getFirstname());
+            return "transfer";
+        } catch (InsufficientAmountException e) {
+            String errorMessage = (e.getMessage());
+            model.addAttribute("errorMessage", errorMessage);
+            return "transfer";
+        } catch (NegativeAmountException e) {
+            String errorMessage = (e.getMessage());
+            model.addAttribute("errorMessage", errorMessage);
+            return "transfer";
+        }
     }
-
-
-    /*
-    @PostMapping("/transfer/{friendId},{amount},{comment}")
-    public String transferFriendSubmit(@PathVariable String friendId, @PathVariable String amount, @PathVariable String comment, Model model) {
-        model.addAttribute("friendId", friendId);
-        model.addAttribute("amount", amount);
-        model.addAttribute("comment", comment);
-        iInappTransactionService.sendMoneyToFriend(Integer.parseInt(friendId), Integer.parseInt(amount), comment);
-        return "transfer";
-    }
-
-
-    @PostMapping("/transfer")
-    public String transferFriendSubmit(@RequestParam(value = "friendId") int friendId, @RequestParam(name = "amount") int amount, @RequestParam(name = "comment") String comment, Model model) {
-        model.addAttribute("friendId", friendId);
-        model.addAttribute("amount", amount);
-        model.addAttribute("comment", comment);
-        iInappTransactionService.sendMoneyToFriend(friendId, amount, comment);
-        return "transfer";
-    }*/
 }

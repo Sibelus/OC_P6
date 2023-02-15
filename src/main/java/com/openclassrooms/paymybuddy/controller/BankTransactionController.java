@@ -5,6 +5,10 @@ import com.openclassrooms.paymybuddy.model.BankTransaction;
 import com.openclassrooms.paymybuddy.model.User;
 import com.openclassrooms.paymybuddy.service.IBankTransationService;
 import com.openclassrooms.paymybuddy.service.IUserService;
+import com.openclassrooms.paymybuddy.service.exceptions.InsufficientAmountException;
+import com.openclassrooms.paymybuddy.service.exceptions.NegativeAmountException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +22,10 @@ import java.util.List;
 public class BankTransactionController {
 
     @Autowired
-    IUserService iUserService;
+    private IUserService iUserService;
     @Autowired
-    IBankTransationService iBankTransationService;
+    private IBankTransationService iBankTransationService;
+    Logger logger = LoggerFactory.getLogger(BankTransactionController.class);
 
     @GetMapping("/bankTransaction")
     public String bankTransactionPage(Model model){
@@ -41,8 +46,19 @@ public class BankTransactionController {
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("bankAccounts", bankAccounts);
         model.addAttribute("bankTransaction", bankTransaction);
-        iBankTransationService.bankToUser(bankTransaction);
-        return "profile";
+        try {
+            iBankTransationService.bankToUser(bankTransaction);
+            logger.debug("{} send {} from his bank account {}", currentUser.getFirstname(), bankTransaction.getAmount(), bankTransaction.getBankAccount());
+            return "profile";
+        } catch (InsufficientAmountException e) {
+            String errorMessage = (e.getMessage());
+            model.addAttribute("errorMessage", errorMessage);
+            return "profile";
+        } catch (NegativeAmountException e) {
+            String errorMessage = (e.getMessage());
+            model.addAttribute("errorMessage", errorMessage);
+            return "profile";
+        }
     }
 
     @PostMapping("/bankTransaction_userToBank")
@@ -54,7 +70,18 @@ public class BankTransactionController {
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("bankAccounts", bankAccounts);
         model.addAttribute("bankTransaction", bankTransaction);
-        iBankTransationService.userToBank(bankTransaction);
-        return "profile";
+        try {
+            iBankTransationService.userToBank(bankTransaction);
+            logger.debug("{} send {} to his bank account {}", currentUser.getFirstname(), bankTransaction.getAmount(), bankTransaction.getBankAccount());
+            return "profile";
+        } catch (InsufficientAmountException e) {
+            String errorMessage = (e.getMessage());
+            model.addAttribute("errorMessage", errorMessage);
+            return "profile";
+        } catch (NegativeAmountException e) {
+            String errorMessage = (e.getMessage());
+            model.addAttribute("errorMessage", errorMessage);
+            return "profile";
+        }
     }
 }

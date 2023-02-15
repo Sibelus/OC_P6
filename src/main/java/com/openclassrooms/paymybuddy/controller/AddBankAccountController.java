@@ -4,6 +4,9 @@ import com.openclassrooms.paymybuddy.model.BankAccount;
 import com.openclassrooms.paymybuddy.model.User;
 import com.openclassrooms.paymybuddy.service.IBankAccountService;
 import com.openclassrooms.paymybuddy.service.IUserService;
+import com.openclassrooms.paymybuddy.service.exceptions.EmptyBankAccountNameException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AddBankAccountController {
 
     @Autowired
-    IBankAccountService iBankAccountService;
+    private IBankAccountService iBankAccountService;
     @Autowired
-    IUserService iUserService;
+    private IUserService iUserService;
+    Logger logger = LoggerFactory.getLogger(AddBankAccountController.class);
 
     @GetMapping("/addBankAccount")
     public String createAccountForm(Model model) {
@@ -27,10 +31,18 @@ public class AddBankAccountController {
 
     @PostMapping("/addBankAccount")
     public String createAccountSubmit(@ModelAttribute BankAccount bankAccount, Model model) {
-        model.addAttribute("bankAccount", bankAccount);
-        iBankAccountService.addBankAccount(bankAccount);
         User currentUser = iUserService.getCurrentUser();
+
         model.addAttribute("currentUser", currentUser);
-        return "profile";
+        model.addAttribute("bankAccount", bankAccount);
+        try {
+            iBankAccountService.addBankAccount(bankAccount);
+            logger.debug("{} add new bank account {}", currentUser.getFirstname(), bankAccount.getName());
+            return "profile";
+        } catch (EmptyBankAccountNameException e) {
+            String errorMessage = (e.getMessage());
+            model.addAttribute("errorMessage", errorMessage);
+            return "profile";
+        }
     }
 }
