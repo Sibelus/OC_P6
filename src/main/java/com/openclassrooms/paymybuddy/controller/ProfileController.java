@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ProfileController {
 
     @Autowired
-    IUserService iUserService;
+    private IUserService iUserService;
 
     @GetMapping("/profile")
     public String profilePage(Model model) {
