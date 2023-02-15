@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface InAppTransactionRepository extends JpaRepository<InAppTransaction, Integer> {
-    List<InAppTransaction> findBySenderId(int id);
 }
