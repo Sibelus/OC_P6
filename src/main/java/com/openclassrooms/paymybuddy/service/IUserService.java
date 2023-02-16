@@ -13,7 +13,9 @@ import java.util.Optional;
 public interface IUserService {
 
     Optional<User> findByEmail(String email);
-    User addUser(User user) throws EmptyEmailException, EmptyFirstnameException, EmptyPasswordException, EmptyLastnameException;
+    void addUser(User user) throws EmptyEmailException, EmptyFirstnameException, EmptyPasswordException, EmptyLastnameException;
+    void updateUser(User user) throws EmptyFirstnameException, EmptyLastnameException, EmptyEmailException, EmptyPasswordException;
+    void deleteUser(User user);
 
 
     //----------- Get current user info -----------
