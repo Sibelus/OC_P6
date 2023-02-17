@@ -32,6 +32,7 @@ public class SecurityConfiguration {
         http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/createAccount").permitAll()
+                .requestMatchers("/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
                 .and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login");
