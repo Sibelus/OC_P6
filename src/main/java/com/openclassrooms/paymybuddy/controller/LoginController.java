@@ -16,12 +16,13 @@ public class LoginController {
 
     @GetMapping("/")
     public String homePage(Model model) {
-        return "login";
+        return "home";
     }
 
+    /*
     @GetMapping("/login")
     public String loginPage(Model model) {
         model.addAttribute("user", new User());
         return "login";
-    }
+    }*/
 }

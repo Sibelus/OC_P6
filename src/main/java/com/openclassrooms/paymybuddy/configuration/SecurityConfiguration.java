@@ -34,8 +34,8 @@ public class SecurityConfiguration {
                 .requestMatchers("/createAccount").permitAll()
                 .requestMatchers("/css/**").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
-                .and().oauth2Login().loginPage("/login").defaultSuccessUrl("/homeOauth2").permitAll()
+                .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
+                //.and().oauth2Login().loginPage("/login").defaultSuccessUrl("/homeOauth2")
                 .and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login");
 
 
