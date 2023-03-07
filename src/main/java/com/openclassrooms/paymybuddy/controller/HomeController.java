@@ -22,4 +22,10 @@ public class HomeController {
         model.addAttribute("welcomMessage", welcomMessage);
         return "home";
     }
+
+    @GetMapping("/homeOauth2")
+    public String oauthConnexion(Model model){
+        User user = new User();
+        return "home";
+    }
 }

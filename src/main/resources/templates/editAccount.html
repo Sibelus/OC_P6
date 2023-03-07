@@ -2,15 +2,15 @@
 <html>
 
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Edit account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
 <body>
-<div class="container">
+<div class="container_login">
     <form method="post" th:action="@{/editAccount}" th:object="${currentUser}">
         <h3 class="form-signin-heading">EDIT MY ACCOUNT</h3><br/>
         <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
@@ -19,7 +19,7 @@
         <input type="text" th:field="*{lastname}" value="${currentUser.lastname}" class="form-control" /><br/>
         <input type="email" th:field="*{email}" value="${currentUser.email}" class="form-control" /><br/>
         <input type="password" th:field="*{password}" value="${currentUser.password}" class="form-control" /><br/>
-        <button type="submit" th:text="Edit" class="btn btn-lg btn-primary btn-block"></button>
+        <button type="submit" th:text="Edit" class="button_submit"></button>
     </form><br/>
 
     <a th:href="@{/editAccount_delete}">Delete my account</a><br/>

@@ -3,17 +3,22 @@
 
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
 <body>
-    <div class="container">
+    <div class="container_login">
         <a th:href="@{/createAccount}">CREATE ACCOUNT</a>
 
         <br/><br/>
+
+        <a th:href="@{/oauth2/authorization/github}">Login with GitHub</a>
+
+        <br/><br/>
+
         <form th:action="@{/login}" method="POST" class="form-signin">
             <h3 class="form-signin-heading">LOGIN</h3><br/>
 
@@ -23,7 +28,7 @@
 
             <input type="text" id="username" name="username"  th:placeholder="Username" class="form-control" /> <br/>
             <input type="password"  th:placeholder="Password" id="password" name="password" class="form-control" /> <br />
-            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+            <button class="button_submit" name="Submit" value="Login" type="Submit" th:text="Login"></button>
         </form>
     </div>
 </body>

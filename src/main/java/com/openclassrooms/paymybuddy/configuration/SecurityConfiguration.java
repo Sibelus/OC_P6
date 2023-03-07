@@ -35,6 +35,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
+                .and().oauth2Login().loginPage("/login").defaultSuccessUrl("/homeOauth2").permitAll()
                 .and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login");
 
 

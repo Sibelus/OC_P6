@@ -49,7 +49,7 @@ public class ContactController {
         try {
             iConnectionService.addFriendship(email);
             logger.debug("{} become friend with {}", currentUser.getFirstname(), friend.get().getFirstname());
-            return "contact";
+            return "redirect:/contact";
         } catch (AllReadyFrienWithException e) {
             String errorMessage = (e.getMessage());
             model.addAttribute("errorMessage", errorMessage);

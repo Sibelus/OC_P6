@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Transfer</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
     <div class="container">
-        <div class = "navigation">
-            <a th:href="@{/home}">PAY MY BUDDY</a>
-            <a th:href="@{/home}">HOME</a>
-            <a th:href="@{/transfer}">TRANSFER</a>
-            <a th:href="@{/profile}">PROFILE</a>
-            <a th:href="@{/contact}">CONTACT</a>
-            <a th:href="@{/logout}">LOGOUT</a>
+        <div class = "navigation_header">
+            <a th:href="@{/home}" id="logo">PAY MY BUDDY</a>
+            <div class="navigation">
+                <a th:href="@{/home}">HOME</a>
+                <a th:href="@{/transfer}" id="active_page">TRANSFER</a>
+                <a th:href="@{/profile}">PROFILE</a>
+                <a th:href="@{/contact}">CONTACT</a>
+                <a th:href="@{/logout}">LOGOUT</a>
+            </div>
         </div>
-
-        <h1>TRANSFER</h1><br/>
 
         <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
 
-        <form method="post" th:action="@{/transfer}" th:object="${inAppTransaction}">
-            <h3 class="form-signin-heading">SEND MONEY TO FRIEND</h3>
+        <h3 class="form-signin-heading">SEND MONEY TO FRIEND</h3>
 
-            <select th:field="*{receiver}">
+        <form class="form_inline" method="post" th:action="@{/transfer}" th:object="${inAppTransaction}">
+            <select class="form_select_friend" th:field="*{receiver}">
                 <option th:each="f: ${friends}" type="number" th:value="${f.friend.id}" th:text="${f.friend.firstname} + ' ' + ${f.friend.lastname}" name="friendId"/>
             </select>
-            <input th:field="*{amount}" type="number" placeholder="250" name="amount" class="form-control" /><br/>
-            <input th:field="*{comment}" type="text" name="comment" placeholder="send to my friend" class="form-control" /><br/>
-            <button type="submit" th:text="Send" class="btn btn-lg btn-primary btn-block"></button>
+            <input th:field="*{comment}" type="text" name="comment" placeholder="send to my friend" class="form-control" />
+            <input th:field="*{amount}" type="number" placeholder="250" name="amount" id="form_send_amount" class="form-control" />
+            <button type="submit" th:text="Send" class="button_submit_inline"></button>
         </form><br/>
 
         <h2 class="h2">My transactions</h2>

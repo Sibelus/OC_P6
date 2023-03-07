@@ -43,12 +43,12 @@ public class TransferController {
     @PostMapping("/transfer")
     public String bankToUserSubmit(@ModelAttribute InAppTransaction inAppTransaction, Model model){
         User currentUser = iUserService.getCurrentUser();
-        List<Connection> friendsList = currentUser.getFriendsList();
+        List<Connection> friends = currentUser.getFriendsList();
         List<InAppTransaction> inAppTransactions = currentUser.getInAppTransactions();
         List<BankTransaction> bankTransactions = currentUser.getBankTransactions();
 
         model.addAttribute("currentUser", currentUser);
-        model.addAttribute("friendList", friendsList);
+        model.addAttribute("friends", friends);
         model.addAttribute("inAppTransaction", inAppTransaction);
         model.addAttribute("inAppTransactions", inAppTransactions);
         model.addAttribute("bankTransactions", bankTransactions);
@@ -57,7 +57,7 @@ public class TransferController {
         try {
             iInappTransactionService.sendMoneyToFriend(inAppTransaction);
             logger.debug("{} send {} to {}", currentUser.getFirstname(), inAppTransaction.getAmount(), inAppTransaction.getReceiver().getFirstname());
-            return "transfer";
+            return "redirect:/transfer";
         } catch (InsufficientAmountException e) {
             String errorMessage = (e.getMessage());
             model.addAttribute("errorMessage", errorMessage);

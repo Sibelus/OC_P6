@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>profile</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
 <div class="container">
-    <div class = "navigation">
-        <a th:href="@{/home}">PAY MY BUDDY</a>
-        <a th:href="@{/home}">HOME</a>
-        <a th:href="@{/transfer}">TRANSFER</a>
-        <a th:href="@{/profile}">PROFILE</a>
-        <a th:href="@{/contact}">CONTACT</a>
-        <a th:href="@{/logout}">LOGOUT</a>
+    <div class = "navigation_header">
+        <a th:href="@{/home}" id="logo">PAY MY BUDDY</a>
+        <div class="navigation">
+            <a th:href="@{/home}">HOME</a>
+            <a th:href="@{/transfer}">TRANSFER</a>
+            <a th:href="@{/profile}" id="active_page">PROFILE</a>
+            <a th:href="@{/contact}">CONTACT</a>
+            <a th:href="@{/logout}">LOGOUT</a>
+        </div>
     </div>
 
-    <h1>PROFILE</h1>
     <a th:href="@{/editAccount}">Edit my account</a><br/>
 
     <p>Firstname : <span th:text="${currentUser.firstname}"></span></p>
