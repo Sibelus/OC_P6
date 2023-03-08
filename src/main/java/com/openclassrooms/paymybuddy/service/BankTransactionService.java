@@ -19,8 +19,6 @@ public class BankTransactionService implements IBankTransationService{
     @Autowired
     private BankTransactionRepository bankTransactionRepository;
     @Autowired
-    private IUserService iUserService;
-    @Autowired
     private IFeeService iFeeService;
     Logger logger = LoggerFactory.getLogger(BankTransactionService.class);
 
