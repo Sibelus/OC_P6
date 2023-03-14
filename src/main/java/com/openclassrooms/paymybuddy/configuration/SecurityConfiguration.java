@@ -31,14 +31,11 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/createAccount").permitAll()
-                .requestMatchers("/css/**").permitAll()
+                .requestMatchers( "/createAccount", "/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
-                //.and().oauth2Login().loginPage("/login").defaultSuccessUrl("/homeOauth2")
+                .and().oauth2Login().loginPage("/login").defaultSuccessUrl("/oauthLogin")
                 .and().logout().deleteCookies("JSESSIONID").logoutUrl("/logout").logoutSuccessUrl("/login");
-
-
         return http.build();
     }
 
