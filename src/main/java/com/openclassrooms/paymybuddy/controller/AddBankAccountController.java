@@ -38,7 +38,7 @@ public class AddBankAccountController {
         try {
             iBankAccountService.addBankAccount(bankAccount);
             logger.debug("{} add new bank account {}", currentUser.getFirstname(), bankAccount.getName());
-            return "profile";
+            return "redirect:/profile";
         } catch (EmptyBankAccountNameException e) {
             String errorMessage = (e.getMessage());
             model.addAttribute("errorMessage", errorMessage);
