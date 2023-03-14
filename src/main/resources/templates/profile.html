@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-<div class="container">
     <div class = "navigation_header">
         <a th:href="@{/home}" id="logo">PAY MY BUDDY</a>
         <div class="navigation">
@@ -21,21 +20,33 @@
         </div>
     </div>
 
-    <a th:href="@{/editAccount}">Edit my account</a><br/>
+    <div class="container_content">
+        <div class="profile_content">
+            <div class="profile_links">
+                <a th:href="@{/editAccount}">Edit my account</a><br/>
+            </div>
+            <div>
+                <h2>My infos:</h2>
+                <p>Firstname : <span th:text="${currentUser.firstname}"></span></p>
+                <p>Lastname : <span th:text="${currentUser.lastname}"></span></p>
+                <p>eMail : <span th:text="${currentUser.email}"></span></p>
+                <p>Amount : <span th:text="${currentUser.amount}"></span></p>
+            </div>
+        </div>
 
-    <p>Firstname : <span th:text="${currentUser.firstname}"></span></p>
-    <p>Lastname : <span th:text="${currentUser.lastname}"></span></p>
-    <p>eMail : <span th:text="${currentUser.email}"></span></p>
-    <p>Amount : <span th:text="${currentUser.amount}"></span></p>
-
-    <p>My bank accounts :</p>
-    <a th:href="@{/addBankAccount}">Add bank account</a><br/>
-    <ul th:each="bankAccount: ${currentUser.bankAccountList}">
-        <li><span th:text="${bankAccount.name} + ' ' + ${bankAccount.amount}"></li>
-    </ul>
-
-    <a th:href="@{/bankTransaction}">Credit my account</a><br/>
-    <a th:href="@{/bankTransaction}">Get my money back</a>
-</div>
+        <div class="profile_content">
+            <div class="profile_links">
+                <div class="links"><a th:href="@{/addBankAccount}">Add bank account</a></div>
+                <div class="links"><a th:href="@{/bankTransaction}">Credit my account</a></div>
+                <div class="links"><a th:href="@{/bankTransaction}">Get my money back</a></div>
+            </div>
+            <div>
+                <h2>My bank accounts:</h2>
+                <ul th:each="bankAccount: ${currentUser.bankAccountList}">
+                    <li><span th:text="${bankAccount.name} + ' ' + ${bankAccount.amount}"></li></br>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

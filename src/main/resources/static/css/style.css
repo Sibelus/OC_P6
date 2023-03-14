@@ -25,6 +25,13 @@ ul
   margin: 0;
 }
 
+fieldset
+{
+    border-radius: 10px;
+    padding: 25px;
+    padding-top: 50px;
+}
+
 select
 {
     width: 450px;
@@ -36,6 +43,33 @@ select
     border-width: 1px;
     border-style: solid;
     border-color: green;
+}
+
+table
+{
+    width: 850px;
+    margin: auto;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+thead
+{
+    background-color: green;
+    color: white;
+}
+
+tr
+{
+    height: 70px
+}
+
+td
+{
+    text-align: center;
 }
 
 
@@ -52,7 +86,7 @@ select
 
 .navigation_header
 {
-    margin-bottom: 50px;
+    margin-bottom: 75px;
 }
 
 .navigation
@@ -71,6 +105,35 @@ select
 }
 
 
+/* ----- navigation ----- */
+.container_content
+{
+    width: 850px;
+    margin: auto;
+}
+
+
+/* ----- profile content ----- */
+.profile_content
+{
+    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.profile_links
+{
+    width: 200px;
+    padding-top: 25px;
+}
+
+.links
+{
+    margin-bottom: 25px;
+}
+
+
 /* ----- form ----- */
 .container_login
 {
@@ -78,7 +141,7 @@ select
     width: 450px;
 }
 
-.form-control, .select-control, .button_submit
+.form-control, .select-control, .button_submit, .form-control-friend
 {
     display: block;
     border-radius: 5px;
@@ -89,7 +152,7 @@ select
     width: 436px;
     height: 36px;
     margin: 0px;
-    padding: 5px;
+    padding: 6px;
     border-width: 1px;
     border-style: solid;
     border-color: green;
@@ -112,11 +175,23 @@ select
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.form-control-friend
+{
+    width: 85%;
+    height: 36px;
+    margin: 0px;
+    padding: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: green;
 }
 
 .button_submit_inline
 {
-   width: 100px;
+   width: 70px;
    height: 50px;
    border-style: solid;
    border-color: green;
@@ -151,4 +226,9 @@ select
 #form_send_amount
 {
     width: 150px;
+}
+
+#welcome_message
+{
+    text-align: center;
 }

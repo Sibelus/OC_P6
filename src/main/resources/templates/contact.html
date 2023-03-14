@@ -9,32 +9,29 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-    <div class="container">
-        <div class = "navigation_header">
-            <a th:href="@{/home}" id="logo">PAY MY BUDDY</a>
-            <div class="navigation">
-                <a th:href="@{/home}">HOME</a>
-                <a th:href="@{/transfer}">TRANSFER</a>
-                <a th:href="@{/profile}">PROFILE</a>
-                <a th:href="@{/contact}" id="active_page">CONTACT</a>
-                <a th:href="@{/logout}">LOGOUT</a>
-            </div>
+    <div class = "navigation_header">
+        <a th:href="@{/home}" id="logo">PAY MY BUDDY</a>
+        <div class="navigation">
+            <a th:href="@{/home}">HOME</a>
+            <a th:href="@{/transfer}">TRANSFER</a>
+            <a th:href="@{/profile}">PROFILE</a>
+            <a th:href="@{/contact}" id="active_page">CONTACT</a>
+            <a th:href="@{/logout}">LOGOUT</a>
         </div>
+    </div>
 
-        <div class="container">
-            <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+    <div class="container_content">
+        <h3>ADD NEW FRIEND</h3>
+        <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
 
-            <form method="post" th:action="@{/contact}">
-                <h3 class="form-signin-heading">ADD NEW FRIEND</h3><br/>
+        <form class="form_inline" method="post" th:action="@{/contact}">
+            <input type="text" th:placeholder="newFriend" id="email" name="email" class="form-control-friend" /><br/>
+            <button type="Submit" th:text="add" class="button_submit_inline" ></button>
+        </form>
 
-                <input type="text" th:placeholder="newFriend" id="email" name="email" class="form-control" /><br/>
-                <button type="Submit" th:text="search" class="btn btn-lg btn-primary btn-block" ></button>
-            </form>
-        </div>
-
-        <h2 class="h2">My contacts</h2>
+        <h3 class="h2">My contacts</h3>
         <ul th:each="f: ${friendList}">
-            <li th:text="${f.friend.firstname} + ' ' + ${f.friend.lastname}"></li>
+            <li th:text="${f.friend.firstname} + ' ' + ${f.friend.lastname}"></li></br>
         </ul>
     </div>
 </body>

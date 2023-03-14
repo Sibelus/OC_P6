@@ -9,19 +9,19 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-    <div class="container">
-        <div class = "navigation_header">
-            <a th:href="@{/home}" id="logo">PAY MY BUDDY</a>
-            <div class="navigation">
-                <a th:href="@{/home}" id="active_page">HOME</a>
-                <a th:href="@{/transfer}">TRANSFER</a>
-                <a th:href="@{/profile}">PROFILE</a>
-                <a th:href="@{/contact}">CONTACT</a>
-                <a th:href="@{/logout}">LOGOUT</a>
-            </div>
+    <div class = "navigation_header">
+        <a th:href="@{/home}" id="logo">PAY MY BUDDY</a>
+        <div class="navigation">
+            <a th:href="@{/home}" id="active_page">HOME</a>
+            <a th:href="@{/transfer}">TRANSFER</a>
+            <a th:href="@{/profile}">PROFILE</a>
+            <a th:href="@{/contact}">CONTACT</a>
+            <a th:href="@{/logout}">LOGOUT</a>
         </div>
+    </div>
 
-        <h2><div th:text="${welcomMessage}" /></h2><br />
+    <div class="container_content">
+        <h2 id="welcome_message"><div th:text="${welcomMessage}" /></h2>
     </div>
 </body>
 </html>
