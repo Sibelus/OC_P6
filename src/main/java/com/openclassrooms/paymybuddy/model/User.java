@@ -28,6 +28,9 @@ public class User {
     @Column(name = "amount")
     private int amount;
 
+    @Column(name = "github")
+    private String github;
+
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
@@ -104,6 +107,14 @@ public class User {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
     }
 
     public List<BankAccount> getBankAccountList() {
