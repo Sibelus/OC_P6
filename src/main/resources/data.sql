@@ -9,10 +9,11 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE user (
 `id` INTEGER NOT NULL AUTO_INCREMENT,
 `email` VARCHAR(100) NOT NULL UNIQUE,
-`password` VARCHAR(100) NOT NULL,
+`password` VARCHAR(100),
 `firstname` VARCHAR(100) NOT NULL,
 `lastname` VARCHAR(100) NOT NULL,
 `amount` INTEGER,
+`github` VARCHAR(100) UNIQUE,
 PRIMARY KEY (`id`)
 );
 
@@ -85,3 +86,16 @@ INSERT INTO `bank_account` (`id`, `user_id`, `name`, `amount`) VALUES
 (2, 2, 'Boursorama', 1200),
 (3, 3, 'Crédit mutuel', 1500),
 (4, 4, 'Société générale', 1100);
+
+INSERT INTO `connection` (`id`, `user_id`, `friend_id`) VALUES
+(1, 1, 2),
+(2, 1, 3),
+(3, 1, 4);
+
+INSERT INTO `in_app_transaction` (`id`, `sender_id`, `receiver_id`, `amount`, `comment`, `fee`) VALUES
+(1, 1, 2, 12, 'monday lunch', 0.6),
+(2, 1, 2, 12, 'tuesday lunch', 0.6),
+(3, 1, 2, 12, 'wednesday lunch', 0.6),
+(4, 1, 2, 12, 'thursday lunch', 0.6),
+(5, 1, 2, 12, 'friday lunch', 0.6),
+(6, 1, 2, 24, 'happy hour', 1.2);
