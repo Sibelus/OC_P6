@@ -18,6 +18,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -67,6 +69,25 @@ public class UserService implements IUserService{
         userRepository.save(user);
     }
 
+    @Override
+    public void addOauthUser(User user) throws EmptyEmailException, EmptyFirstnameException, EmptyLastnameException {
+        if(user.getFirstname().equals("")){
+            logger.error("Firstname provided is empty");
+            throw new EmptyFirstnameException("Firstname provided is empty, you must set a valid one");
+        }
+        if(user.getLastname().equals("")){
+            logger.error("Firstname provided is empty");
+            throw new EmptyLastnameException("Lastname provided is empty, you must set a valid one");
+        }
+        if(user.getEmail().equals("")){
+            logger.error("Email provided is empty");
+            throw new EmptyEmailException("Email provided is empty, you must set a valid one");
+        }
+
+        logger.debug("Save new Oauth user");
+        userRepository.save(user);
+    }
+
     @Transactional
     @Override
     public void updateUser(User user) throws EmptyFirstnameException, EmptyLastnameException, EmptyEmailException, EmptyPasswordException {
@@ -106,7 +127,6 @@ public class UserService implements IUserService{
         //executeInsideTransaction(entityManager -> entityManager.remove(user));
     }
 
-
     //----------- Get current user info -----------
     @Override
     public User getCurrentUser() {
@@ -115,6 +135,12 @@ public class UserService implements IUserService{
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             currentUserEmail = authentication.getName();
         }
+        if (authentication instanceof OAuth2AuthenticationToken) {
+            OAuth2User principal = (OAuth2User) authentication.getPrincipal();
+            String githubId = principal.getName();
+            currentUserEmail = userRepository.findByGithub(githubId).getEmail();
+        }
+
         User currentUser = findByEmail(currentUserEmail).get();
         return currentUser;
     }

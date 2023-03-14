@@ -14,6 +14,7 @@ public interface IUserService {
 
     Optional<User> findByEmail(String email);
     void addUser(User user) throws EmptyEmailException, EmptyFirstnameException, EmptyPasswordException, EmptyLastnameException;
+    void addOauthUser(User user) throws EmptyEmailException, EmptyFirstnameException, EmptyLastnameException;
     void updateUser(User user) throws EmptyFirstnameException, EmptyLastnameException, EmptyEmailException, EmptyPasswordException;
     void deleteUser(User user);
 
