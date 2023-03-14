@@ -19,10 +19,9 @@ public class LoginController {
         return "home";
     }
 
-    /*
     @GetMapping("/login")
     public String loginPage(Model model) {
         model.addAttribute("user", new User());
         return "login";
-    }*/
+    }
 }
