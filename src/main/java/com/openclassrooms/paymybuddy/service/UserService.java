@@ -7,7 +7,6 @@ import com.openclassrooms.paymybuddy.service.exceptions.EmptyFirstnameException;
 import com.openclassrooms.paymybuddy.service.exceptions.EmptyLastnameException;
 import com.openclassrooms.paymybuddy.service.exceptions.EmptyPasswordException;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +22,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @Service
 public class UserService implements IUserService{
@@ -118,13 +116,11 @@ public class UserService implements IUserService{
         currentUser.setPassword(password);
         userRepository.save(currentUser);
         logger.debug("Update user infos");
-        //executeInsideTransaction(entityManager -> entityManager.merge(user));
     }
 
     @Override
     public void deleteUser(User user) throws InternalAuthenticationServiceException {
         userRepository.delete(user);
-        //executeInsideTransaction(entityManager -> entityManager.remove(user));
     }
 
     //----------- Get current user info -----------
@@ -143,19 +139,5 @@ public class UserService implements IUserService{
 
         User currentUser = findByEmail(currentUserEmail).get();
         return currentUser;
-    }
-
-    //----------- Transaction -----------
-    private void executeInsideTransaction(Consumer<EntityManager> action) {
-        EntityTransaction tx = entityManager.getTransaction();
-        try {
-            tx.begin();
-            action.accept(entityManager);
-            tx.commit();
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            throw e;
-        }
     }
 }
