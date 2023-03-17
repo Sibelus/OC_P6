@@ -205,6 +205,26 @@ td
     width: 150px;
 }
 
+/* ----- pagination ----- */
+.pagination
+{
+    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.pagination a
+{
+    width: 90px;
+    height: 20px;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
+
 /*//////// id ////////*/
 /* ----- id ----- */
 #active_page, #logo
