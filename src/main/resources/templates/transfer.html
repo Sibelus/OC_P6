@@ -52,12 +52,14 @@
             </tr>
             </tbody>
         </table>
-        <div th:if="${inAppTransactionPage.totalPages > 0}" class="pagination"
-             th:each="pageNumber : ${pageNumbers}">
-            <a th:href="@{/transfer(size=${inAppTransactionPage.size}, page=${pageNumber})}"
-               th:text=${pageNumber}
-               th:class="${pageNumber==inAppTransactionPage.number + 1} ? active">
-            </a>
+        <div class="pagination">
+            <div th:if="${inAppTransactionPage.totalPages > 0}"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/transfer(size=${inAppTransactionPage.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==inAppTransactionPage.number + 1} ? active">
+                </a>
+            </div>
         </div>
 
 
@@ -80,12 +82,14 @@
             </tr>
             </tbody>
         </table>
-        <div th:if="${bankTransactionPage.totalPages > 0}" class="pagination"
-             th:each="pageNumber2 : ${pageNumbersBank}">
-            <a th:href="@{/transfer(sizeBank=${bankTransactionPage.size}, pageBank=${pageNumber2})}"
-               th:text=${pageNumber2}
-               th:class="${pageNumber2==bankTransactionPage.number + 1} ? active">
-            </a>
+        <div class="pagination">
+            <div th:if="${bankTransactionPage.totalPages > 0}"
+                 th:each="pageNumber2 : ${pageNumbersBank}">
+                <a th:href="@{/transfer(sizeBank=${bankTransactionPage.size}, pageBank=${pageNumber2})}"
+                   th:text=${pageNumber2}
+                   th:class="${pageNumber2==bankTransactionPage.number + 1} ? active">
+                </a>
+            </div>
         </div>
     </div>
 </body>
