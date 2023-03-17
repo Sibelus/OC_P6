@@ -32,23 +32,6 @@ public class TransferController {
     Logger logger = LoggerFactory.getLogger(TransferController.class);
 
 
-    /*
-    @GetMapping("/transfer")
-    public String transferPage(Model model) {
-        InAppTransaction inAppTransaction = new InAppTransaction();
-        User currentUser = iUserService.getCurrentUser();
-        List<Connection> friends = currentUser.getFriendsList();
-        List<InAppTransaction> inAppTransactions = currentUser.getInAppTransactions();
-        List<BankTransaction> bankTransactions = currentUser.getBankTransactions();
-
-        model.addAttribute("friends", friends);
-        model.addAttribute("inAppTransaction", inAppTransaction);
-        model.addAttribute("inAppTransactions", inAppTransactions);
-        model.addAttribute("bankTransactions", bankTransactions);
-        return "transfer";
-    }*/
-
-
     @GetMapping("/transfer")
     public String transferPage(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
                                @RequestParam("pageBank") Optional<Integer> pageBank, @RequestParam("sizeBank") Optional<Integer> sizeBank) {
