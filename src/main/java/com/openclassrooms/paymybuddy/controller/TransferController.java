@@ -98,7 +98,7 @@ public class TransferController {
 
 
     @PostMapping("/transfer")
-    public String bankToUserSubmit(@ModelAttribute InAppTransaction inAppTransaction, Model model){
+    public String sendMoneyToFriendSubmit(@ModelAttribute InAppTransaction inAppTransaction, Model model){
         User currentUser = iUserService.getCurrentUser();
         List<Connection> friends = currentUser.getFriendsList();
         List<InAppTransaction> inAppTransactions = currentUser.getInAppTransactions();
@@ -118,11 +118,11 @@ public class TransferController {
         } catch (InsufficientAmountException e) {
             String errorMessage = (e.getMessage());
             model.addAttribute("errorMessage", errorMessage);
-            return "transfer";
+            return "error";
         } catch (NegativeAmountException e) {
             String errorMessage = (e.getMessage());
             model.addAttribute("errorMessage", errorMessage);
-            return "transfer";
+            return "error";
         }
     }
 }
