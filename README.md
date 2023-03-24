@@ -14,11 +14,9 @@ What things you need to install the software.
 
 <h3>Data base</h3>
 All infos are saved in data base, you need to create a new one.
-To do this you just have to run the file data.sql in Mysql.
-
-            data.sql
+To do this you just have to run the file data.sql in Mysql. You can get this file into the ressources directory.
  
-This is the physical data model :
+All tables are interconnected, to understand how theire connections are structured, you can refer to the physical data model :
 ![DB_Structure](https://user-images.githubusercontent.com/104126607/227484187-5ba7902b-6620-4a79-96f4-f8d16de4cd2b.png)
 
           
